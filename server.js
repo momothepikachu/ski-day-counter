@@ -1,6 +1,7 @@
 const express = require('express')
 const resorts = require('./resort-names.json')
-const port = process.env.PORT || 3333
+const normalizePort = port => parseInt(port, 10)
+const port = normalizePort(process.env.PORT || 3333) 
 const delay = 0
 const cors = require('cors')
 

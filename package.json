@@ -65,7 +65,7 @@
     "workbox-webpack-plugin": "3.6.2"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node ./server",
     "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build",    
     "suggestions": "nodemon ./server --port 3333 --delay 500",
     "begin": "node scripts/start.js",

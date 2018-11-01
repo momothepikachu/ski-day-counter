@@ -19,7 +19,7 @@ export const removeDay = function(date) {
 
 }
 
-export const setGoal = (goal) => 
+export const setGoal = (goal) =>  
 	({
 		type: C.SET_GOAL,
 		payload: goal

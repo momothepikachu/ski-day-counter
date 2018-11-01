@@ -1,15 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { BrowserRouter } from 'react-router-dom'
+import Routes from './routes';
 import storeFactory from './store'
-import { suggestResortNames } from './actions'
+import sampleData from './initialState'
+import { Provider } from 'react-redux'
+import { addError } from './actions'
 
-const store = storeFactory()
+const initialState = (localStorage["redux-store"]) ?
+    JSON.parse(localStorage["redux-store"]) :
+    sampleData
 
-store.dispatch(
-	suggestResortNames('hea')
-)
+const saveState = () => 
+    localStorage["redux-store"] = JSON.stringify(store.getState())
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = storeFactory(initialState)
+store.subscribe(saveState)
 
+const handleError = error => {
+	store.dispatch(
+		addError(error.message)
+	)
+}
+
+window.React = React
+window.store = store
+window.addEventListener("error", handleError)
+
+ReactDOM.render(
+	<Provider store={store}>
+		<BrowserRouter basename={process.env.PUBLIC_URL}>
+			<Routes/>
+		</BrowserRouter>
+	</Provider>, 
+	document.getElementById('root')
+);

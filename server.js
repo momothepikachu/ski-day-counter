@@ -1,6 +1,7 @@
 const express = require('express')
 const resorts = require('./resort-names.json')
-const { port=process.env.PORT, delay=0 } = require('minimist')(process.argv)
+const { delay=0 } = require('minimist')(process.argv)
+const port = process.env.PORT || 3333;
 const cors = require('cors')
 
 const byName = name => resort =>
